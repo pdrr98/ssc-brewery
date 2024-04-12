@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @Entity
 public class Brewery extends BaseEntity {
 
@@ -40,6 +40,6 @@ public class Brewery extends BaseEntity {
         this.breweryName = breweryName;
     }
 
-    private String breweryName;
+    private final String breweryName;
 
 }
