@@ -24,6 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -47,9 +48,10 @@ public class BaseEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
-            name = "UUID"
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false )
+    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
     private UUID id;
 
     @Version
