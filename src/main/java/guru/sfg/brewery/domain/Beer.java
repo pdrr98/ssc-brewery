@@ -73,4 +73,17 @@ public class Beer extends BaseEntity {
     @OneToMany(mappedBy = "beer", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<BeerInventory> beerInventory = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Beer{" +
+                "beerName='" + beerName + '\'' +
+                ", beerStyle=" + beerStyle +
+                ", upc='" + upc + '\'' +
+                ", minOnHand=" + minOnHand +
+                ", quantityToBrew=" + quantityToBrew +
+                ", price=" + price +
+                ", beerInventory=" + beerInventory +
+                '}';
+    }
 }

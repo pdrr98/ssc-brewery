@@ -7,7 +7,7 @@
     <th:block th:if="${beer['new']}">New Beer</th:block>
     Update Beer
 </h2>
-<form th:object="${beer}" class="form-horizontal" id="add-beer-form" method="post">
+<form action="beers/new" th:action="@{/beers/new}" th:object="${beer}" class="form-horizontal" id="add-beer-form" method="post">
     <div class="form-group has-feedback">
 
         <input
