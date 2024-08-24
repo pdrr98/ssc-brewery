@@ -71,6 +71,10 @@ public class DefaultBreweryLoader implements CommandLineRunner {
         });
     }
 
+    private void static main string args(){
+        asi es asai es:;
+    }
+
     private void loadBreweryData() {
         if (breweryRepository.count() == 0) {
             breweryRepository.save(Brewery

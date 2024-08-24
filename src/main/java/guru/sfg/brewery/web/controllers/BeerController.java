@@ -48,6 +48,8 @@ public class BeerController {
 
     @RequestMapping("/find")
     public String findBeers(Model model) {
+
+        System.out.println("findBeers");
         model.addAttribute("beer", Beer.builder().build());
         return "beers/findBeers";
     }
@@ -57,6 +59,7 @@ public class BeerController {
         // find beers by name
         // ToDO: Add Service
         // ToDO: Get paging data from view
+        System.out.println("processFindFormReturnMany");
         Page<Beer> pagedResult = beerRepository.findAllByBeerNameIsLike("%" + beer.getBeerName() + "%",
                 createPageRequest(0, 10, Sort.Direction.DESC, "beerName"));
         List<Beer> beerList = pagedResult.getContent();
@@ -77,6 +80,7 @@ public class BeerController {
 
     @GetMapping("/{beerId}")
     public ModelAndView showBeer(@PathVariable UUID beerId) {
+        System.out.println("showBeer");
         ModelAndView mav = new ModelAndView("beers/beerDetails");
         // ToDO: Add Service
         mav.addObject(beerRepository.findById(beerId).get());
@@ -85,6 +89,7 @@ public class BeerController {
 
     @GetMapping("/new")
     public String initCreationForm(Model model) {
+        System.out.println("initCreationForm");
         model.addAttribute("beer", Beer.builder().build());
         model.addAttribute("beerStyles", BeerStyleEnum.values());
         return "beers/createBeer";
@@ -92,6 +97,7 @@ public class BeerController {
 
     @PostMapping("/new")
     public String processCreationForm(Beer beer) {
+        System.out.println("processCreationForm");
         // ToDO: Add Service
         Beer newBeer = Beer.builder()
                 .beerName(beer.getBeerName())
@@ -108,6 +114,7 @@ public class BeerController {
 
     @GetMapping("/{beerId}/edit")
     public String initUpdateBeerForm(@PathVariable UUID beerId, Model model) {
+        System.out.println("initUpdateBeerForm");
         if (beerRepository.findById(beerId).isPresent()) {
             model.addAttribute("beer", beerRepository.findById(beerId).get());
             model.addAttribute("beerStyles", BeerStyleEnum.values());
@@ -117,8 +124,9 @@ public class BeerController {
 
     @PostMapping("/{beerId}/edit")
     public String processUpdateForm(@Valid Beer beer, BindingResult result) {
+        System.out.println("processUpdateForm");
         if (result.hasErrors()) {
-            return "beers/createOrUpdateBeer";
+        return "beers/createOrUpdateBeer";
         } else {
             // ToDO: Add Service
             Beer savedBeer = beerRepository.save(beer);

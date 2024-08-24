@@ -118,9 +118,10 @@ class BeerControllerTest {
     void processCreationForm() throws Exception {
         when(beerRepository.save(ArgumentMatchers.any())).thenReturn(Beer.builder().id(uuid).build());
         mockMvc.perform(post("/beers/new"))
+                .andExpect(model().attributeExists("beer"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/beers/"+ uuid))
-                .andExpect(model().attributeExists("beer"));
+                .andExpect(view().name("redirect:/beers/"+ uuid));
+//                .andExpect(model().attributeExists("beer"));
         verify(beerRepository).save(ArgumentMatchers.any());
     }
 
@@ -137,6 +138,14 @@ class BeerControllerTest {
     @Test
     void processUpdationForm() throws Exception {
         when(beerRepository.save(ArgumentMatchers.any())).thenReturn(Beer.builder().id(uuid).build());
+        Beer beer2 = beerRepository.save(Beer.builder().build());
+//        Beer beer2 = beerRepository.save(ArgumentMatchers.any());
+        if(beer2 == null){
+            System.out.println("beer2 is nulll");
+        }
+        System.out.println("beer2isnotnull");
+        
+        System.out.println("Beer Name: " + beer2.getBeerName() +" " + "Id: " +beer2.getId().toString() + "Beer Style: " + beer2.getBeerStyle());
 
         mockMvc.perform(post("/beers/"+uuid+"/edit"))
                 .andExpect(status().is3xxRedirection())
